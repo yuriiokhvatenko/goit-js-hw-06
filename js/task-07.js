@@ -1,9 +1,8 @@
+const inputForTask = document.querySelector('#font-size-control');
+const spanForTask = document.querySelector('#text');
 
-const input = document.querySelector(`#font-size-control`)
-const span = document.querySelector(`#text`)
+const fontSizeChanger = () => {
+  spanForTask.style.fontSize = `${inputForTask.value}px`;
+}
 
-input.addEventListener(`input`, (event) => {
-  const inputValue = event.currentTarget.value
-    
-  span.style.fontSize = `${inputValue}px`
-})
+inputForTask.addEventListener('input', fontSizeChanger);

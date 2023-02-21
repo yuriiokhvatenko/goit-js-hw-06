@@ -1,19 +1,14 @@
-const input = document.querySelector(`input`)
+const inputForTask = document.querySelector("#validation-input");
+const validationOfTheInputValueLength = () => {
+  if (inputForTask.value.length === Number(inputForTask.dataset.length)) {
+    inputForTask.classList.add('valid');
+    inputForTask.classList.remove('invalid');
 
-const makeBorderColor = (event) => {
-  return event.addEventListener('blur' , (option) => {
-    const inputValueLength = option.currentTarget.value.length
-   const inputDataSetLength = event.dataset.length
-
-
-   if (inputValueLength == inputDataSetLength) {
-    input.classList.add("valid");
-    input.classList.remove("invalid");
   } else {
-    input.classList.add("invalid");
-    input.classList.remove("valid");
+    inputForTask.classList.add('invalid');
+    inputForTask.classList.remove('valid');
+
   }
-  })
 }
 
-makeBorderColor(input)
+inputForTask.addEventListener('blur', validationOfTheInputValueLength);

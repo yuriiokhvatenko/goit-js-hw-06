@@ -1,19 +1,18 @@
+const formForTask = document.querySelector('.login-form');
+console.log(formForTask);
 
-const form = document.querySelector(`.login-form`)
-
-form.addEventListener(`submit`, handleFormSubmit)
-
-function handleFormSubmit(event) {
-  event.preventDefault();
-  const formElements = event.currentTarget.elements;
-  const email = formElements.email.value;
-  const password = formElements.password.value;
- 
-  if (!email || !password) {
-    alert('All inputs must not be empty');
+const getLoginAndPasswordFromForm = (evt) => {
+  evt.preventDefault();
+  if (!evt.currentTarget.elements.password.value || !evt.currentTarget.elements.email.value) {
+    alert('All fields must be completed');
   } else {
-     const formOutput = { email, password };
-    console.log(formOutput);
-    form.reset();
+    const objectForOutput = {
+      email: evt.currentTarget.elements.email.value,
+      password: evt.currentTarget.elements.password.value
+    };
+    console.log(objectForOutput)
+    formForTask.reset();
   }
-} 
+}
+
+formForTask.addEventListener('submit', getLoginAndPasswordFromForm);
