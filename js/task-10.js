@@ -1,55 +1,41 @@
-// function getRandomHexColor() {
-//   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-// }
-
-
 function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 }
 
-const controls = document.querySelector(`#controls`)
-const inputNumberRef = document.querySelector('[type="number"]');
-const createBtnRef = document.querySelector('button[data-create]');
-const destroyBtnRef = document.querySelector('button[data-destroy]');
-const divBoxesRef = document.getElementById(`boxes`)
-divBoxesRef.style.display = 'flex';
-divBoxesRef.style.flexWrap = 'wrap';
-divBoxesRef.style.alignItems = 'center';
-divBoxesRef.style.marginTop = '30px';
+const form = document.querySelector('#controls');
+console.log(controls);
+const buttonCreate = document.querySelector('[data-create]');
+console.log(buttonCreate);
+const buttonDestroy = document.querySelector('[data-destroy]');
+console.log(buttonDestroy);
+const inputField = document.querySelector('[type="number"]');
+console.log(inputField);
+const creatingBoxes = document.querySelector('#boxes');
 
 
-inputNumberRef.addEventListener(`input`, toogleValue)
-createBtnRef.addEventListener(`click`, () => {
-  createBoxes(Number(inputNumberRef.value))
-})
-destroyBtnRef.addEventListener(`click`, destroyBoxesMarkup)
-
-let valueFromForm = 0;
-function toogleValue(event) {
-  valueFromForm = event.currentTarget.value
-  console.log(valueFromForm)
-}
-
-function createBoxes(amount) {
-  let divArray = [];
-  let sizeDefault = 30;
-
-  for(let i = 0; i < amount; i += 1) {
-    sizeDefault += 10;
-    const divElement = document.createElement(`div`);
-    divElement.classList = 'item';
-    divElement.style.height = `${sizeDefault}px`;
-    divElement.style.width = `${sizeDefault}px`;
-    divElement.style.marginRight = '30px';
-    divElement.style.marginBottom = '30px';
-    divElement.style.backgroundColor = getRandomHexColor();
-    divArray.push(divElement)
+const createBoxes = (amount) => {
+  amount = inputField.value;
+  const arrayOfBox = [];
+  for (let i = 0; i < amount; i += 1) {
+    const box = document.createElement('div');
+    box.style.backgroundColor = getRandomHexColor();
+    box.style.width = `${30 + 10 * i}px`;
+    box.style.height = `${30 + 10 * i}px`;
+    box.style.borderRadius = '15%';
+    arrayOfBox.push(box);
   }
+  creatingBoxes.style.display = 'flex';
+  creatingBoxes.style.flexWrap = 'wrap';
+  creatingBoxes.style.gap = '15px';
+
+  return creatingBoxes.append(...arrayOfBox);
   
-  return divBoxesRef.append(...divArray)
 }
 
-function destroyBoxesMarkup() {
-  inputNumberRef.value = '';
-  return (divBoxesRef.innerHTML = ``)
+const destroyBoxes = () => {
+  inputField.value = '';
+  return creatingBoxes.innerHTML = " ";
 }
+
+buttonCreate.addEventListener('click', createBoxes);
+buttonDestroy.addEventListener('click', destroyBoxes);
