@@ -13,12 +13,6 @@ const images = [
   },
 ];
 
-const linkToInsert = document.querySelector('.gallery');
-console.log(linkToInsert);
-
-const insertImagiesToList = () => {
-  images.map(image => {
-    linkToInsert.insertAdjacentHTML('afterbegin', `<li><img src='${image.url}'  alt= ${image.alt} width=100%, height=auto/> </li>`);
-  })
-}
-insertImagiesToList(images);  
+const galleryForTask = document.querySelector('.gallery');
+const markupForInsert = images.map(image => `<li><img src=${image.url} alt=${image.alt} width=100%></li>`).join('');
+galleryForTask.insertAdjacentHTML('afterbegin', markupForInsert);
